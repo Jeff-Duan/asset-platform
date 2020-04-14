@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+
+		<h1 style="text-align: center;font-size: 80px;">欢迎登陆固定资产管理系统</h1>
+
+		<table style="margin-top: 5%;" align="center" width="40%" height="300px" border="1" cellpadding="2">
+			<form action="#" th:action="@{/access/login}" method="post">
+			<tr align="center">
+				<td>用户名</td>
+				<td>
+					<input name="name" th:name="name"/>
+				</td>
+			</tr>
+			<tr align="center">
+				<td>密码</td>
+				<td>
+					<input type="password" name="password" th:name="password"/>
+				</td>
+			</tr>
+			<tr align="center">
+				<td colspan="2"><button type="submit">提交</button></td>
+			</tr>
+			</form>
+		</table>
+
+	</body>
+
+</html>

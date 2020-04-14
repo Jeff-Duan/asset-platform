@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+</style>
+
+<body style="height: 100%;">
+
+<div style="position:fixed;width: 20%;height: 100%;float: left;">
+    <table style="margin-top: 10%; margin-left: 10%;" align="center" width="60%" height="40%" border="1" cellpadding="2"
+           th:if="${Role == 0}">
+        <tr align="center">
+            <td>
+                <a href="#" th:href="@{/home}">首页</a>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <a href="#" th:href="@{/device}">资产查询</a>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <a href="#" th:href="@{/user}">更改密码</a>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <a href="#" th:href="@{/access/logout}">退出登录</a>
+            </td>
+        </tr>
+    </table>
+    <table style="margin-top: 10%; margin-left: 10%;" align="center" width="60%" height="40%" border="1" cellpadding="2"
+           th:if="${Role == 1}">
+        <tr align="center">
+            <td>
+                <a href="#" th:href="@{/home}">首页</a>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <a href="#" th:href="@{/device}">资产管理</a>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <a href="#">人员管理</a>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <a href="#">资产领用</a>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <a href="#">资产归还</a>
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <a href="#" th:href="@{/access/logout}">退出登录</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div style="position: fixed;margin-left: 25%; width: 75%;height: 100%;">
+    <table style="margin-top: 10%; margin-left: 10%;border-spacing: 10px 20px;" align="center" width="80%" height="20%"
+           border="1" cellpadding="2">
+        <tr align="center">
+            <td>
+                新密码
+                <input id="password" type="password"/>
+            </td>
+            <td>
+                <button type="button" th:onclick="updatePassword()">提交</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript" src="../../jquery-3.4.1.min.js" th:src="@{/jquery-3.4.1.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    var user = [[${User}]];
+
+    function updatePassword() {
+        var formData = new FormData();
+        formData.append('password', $('#password').val());
+        $.ajax({
+            url: '/user/' + user,
+            type: "post",
+            async: false,
+            cache: false,
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            statusCode: {
+                200: function(){
+                    alert("密码修改成功");
+                    window.location.href = "/access/logout";
+                },
+                500: function(){
+                    alert("密码修改失败");
+                }
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>
