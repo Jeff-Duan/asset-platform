@@ -13,6 +13,10 @@ public class DeviceService {
     @Autowired
     DeviceRepository deviceRepository;
 
+    public void save(Device device){
+        deviceRepository.save(device);
+    }
+
     public List<Device> findAll(String name) {
         return deviceRepository.findByName(name);
     }

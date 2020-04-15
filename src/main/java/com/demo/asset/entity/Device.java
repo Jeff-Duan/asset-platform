@@ -34,6 +34,16 @@ public class Device {
     @Column(name = "remark")
     private String remark;
 
+    public Device() {
+        this.name = "";
+        this.price = 0;
+        this.level = 1;
+        this.buyDate = new Date();
+        this.status = true;
+        this.user = "";
+        this.remark = "";
+    }
+
     public long getId() {
         return id;
     }

@@ -5,19 +5,22 @@ import com.demo.asset.service.DeviceService;
 import com.demo.asset.service.LevelService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/device")
 public class DeviceController {
+
+    @Autowired
+    private HttpSession session;
 
     @Autowired
     private LevelService levelService;
@@ -27,11 +30,11 @@ public class DeviceController {
 
     @GetMapping
     public String device(Model model) {
-        model.addAttribute("Levels", levelService.findAll());
+        model.addAttribute("Levels", levelService.findAllLevel1());
         return "device";
     }
 
-    @PostMapping
+    @PostMapping("info")
     public String info(@RequestParam(value = "level1", defaultValue = "") String level1,
                        @RequestParam(value = "level2", defaultValue = "") String level2,
                        @RequestParam(value = "name", defaultValue = "") String name,
@@ -50,6 +53,20 @@ public class DeviceController {
             model.addAttribute("Devices", deviceService.findAll(name));
         }
         return "deviceInfo";
+    }
+
+    @GetMapping("/insert")
+    public String insert(Model model) {
+        model.addAttribute("Levels", levelService.findAllLevel2());
+        return "insert";
+    }
+
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<?> insert(@RequestBody Device device) {
+        device.setUser(String.valueOf(session.getAttribute("User")));
+        deviceService.save(device);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
 }
