@@ -31,14 +31,14 @@ public class DeviceController {
     @GetMapping
     public String device(Model model) {
         model.addAttribute("Levels", levelService.findAllLevel1());
-        return "device";
+        return "device/device";
     }
 
-    @PostMapping("info")
-    public String info(@RequestParam(value = "level1", defaultValue = "") String level1,
-                       @RequestParam(value = "level2", defaultValue = "") String level2,
-                       @RequestParam(value = "name", defaultValue = "") String name,
-                       Model model) {
+    @GetMapping("/all")
+    public String device(@RequestParam(value = "level1", defaultValue = "") String level1,
+                         @RequestParam(value = "level2", defaultValue = "") String level2,
+                         @RequestParam(value = "name", defaultValue = "") String name,
+                         Model model) {
         if (StringUtils.isNotEmpty(level1)) {
             List<Device> devices = new ArrayList<>();
             levelService.find(Long.parseLong(level1)).getLevel2s().forEach(level -> {
@@ -52,13 +52,13 @@ public class DeviceController {
         if (StringUtils.isNotEmpty(name)) {
             model.addAttribute("Devices", deviceService.findAll(name));
         }
-        return "deviceInfo";
+        return "device/info";
     }
 
     @GetMapping("/insert")
     public String insert(Model model) {
         model.addAttribute("Levels", levelService.findAllLevel2());
-        return "insert";
+        return "device/insert";
     }
 
     @PostMapping
@@ -67,6 +67,13 @@ public class DeviceController {
         device.setUser(String.valueOf(session.getAttribute("User")));
         deviceService.save(device);
         return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+
+    @GetMapping("/use")
+    public String useDevice(Model model) {
+        model.addAttribute("Levels", levelService.findAllLevel1());
+        return "device/use";
     }
 
 }

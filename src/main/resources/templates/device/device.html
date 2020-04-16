@@ -44,12 +44,12 @@
            th:if="${Role == 1}">
         <tr align="center">
             <td>
-                <a href="#">首页</a>
+                <a href="#" th:href="@{/home}">首页</a>
             </td>
         </tr>
         <tr align="center">
             <td>
-                <a href="#">资产管理</a>
+                <a href="#" th:href="@{/device}">资产管理</a>
             </td>
         </tr>
         <tr align="center">
@@ -59,7 +59,7 @@
         </tr>
         <tr align="center">
             <td>
-                <a href="#">资产领用</a>
+                <a href="#" th:href="@{/device/use}">资产领用</a>
             </td>
         </tr>
         <tr align="center">
@@ -78,7 +78,7 @@
 <div style="position: fixed;margin-left: 25%; width: 75%;height: 100%;">
     <table style="margin-top: 10%; margin-left: 10%;border-spacing: 10px 20px;" align="center" width="80%" height="60%"
            border="1" cellpadding="2">
-        <form action="#" th:action="@{/device/info}" method="post">
+        <form action="#" th:action="@{/device/all}" method="get">
             <tr align="center">
                 <td>
                     一级类别
@@ -91,7 +91,7 @@
                 </td>
             </tr>
         </form>
-        <form action="#" th:action="@{/device}" method="post">
+        <form action="#" th:action="@{/device/all}" method="get">
             <tr align="center">
                 <td>
                     二级类别
@@ -105,7 +105,7 @@
                 </td>
             </tr>
         </form>
-        <form action="#" th:action="@{/device}" method="post">
+        <form action="#" th:action="@{/device/all}" method="get">
             <tr align="center">
                 <td>
                     名称

@@ -9,6 +9,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class SimpleBeanConfig implements WebMvcConfigurer {
 
+    private String[] getPathPatterns() {
+        return new String[]{
+                "/home/**",
+                "/user/**",
+                "/device/**",
+        };
+    }
+
     @Bean
     public AccessInterceptor accessInterceptor() {
         return new AccessInterceptor();
@@ -16,7 +24,7 @@ public class SimpleBeanConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(accessInterceptor()).addPathPatterns("/*");
+        registry.addInterceptor(accessInterceptor()).addPathPatterns(getPathPatterns());
     }
 
 }

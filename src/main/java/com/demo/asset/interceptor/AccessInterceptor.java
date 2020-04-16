@@ -14,6 +14,13 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
     HttpSession session;
 
     @Override
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response,
+                             Object handler) {
+        return true;
+    }
+
+    @Override
     public void postHandle(final HttpServletRequest request,
                            final HttpServletResponse response,
                            final Object handler,
@@ -24,10 +31,4 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
         }
     }
 
-    @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response,
-                             Object handler) {
-        return true;
-    }
 }
