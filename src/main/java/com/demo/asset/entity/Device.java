@@ -3,6 +3,7 @@ package com.demo.asset.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "device")
@@ -33,6 +34,9 @@ public class Device {
 
     @Column(name = "remark")
     private String remark;
+
+    @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<UseRecord> useRecords;
 
     public Device() {
         this.name = "";
@@ -106,5 +110,13 @@ public class Device {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<UseRecord> getUseRecords() {
+        return useRecords;
+    }
+
+    public void setUseRecords(List<UseRecord> useRecords) {
+        this.useRecords = useRecords;
     }
 }

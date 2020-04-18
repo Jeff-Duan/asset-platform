@@ -1,5 +1,7 @@
 package com.demo.asset.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,7 +15,7 @@ public class UseRecord {
     private long id;
 
     @Column(name = "device_id")
-    private String deviceId;
+    private long deviceId;
 
     @Column(name = "use_date")
     private Date useDate;
@@ -23,6 +25,14 @@ public class UseRecord {
 
     @Column(name = "remark")
     private String remark;
+
+    @OneToOne(mappedBy = "useRecord", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private ReturnRecord returnRecord;
+
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "device_id", insertable = false, updatable = false)
+    @JsonIgnore
+    private Device device;
 
     public UseRecord() {
         this.useDate = new Date();
@@ -38,11 +48,11 @@ public class UseRecord {
         this.id = id;
     }
 
-    public String getDeviceId() {
+    public long getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(String deviceId) {
+    public void setDeviceId(long deviceId) {
         this.deviceId = deviceId;
     }
 
@@ -68,5 +78,21 @@ public class UseRecord {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public ReturnRecord getReturnRecord() {
+        return returnRecord;
+    }
+
+    public void setReturnRecord(ReturnRecord returnRecord) {
+        this.returnRecord = returnRecord;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
     }
 }

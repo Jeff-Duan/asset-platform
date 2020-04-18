@@ -9,8 +9,10 @@ import java.util.List;
 @Repository
 public interface DeviceRepository extends JpaRepository<Device, Long> {
 
-    List<Device> findByName(String name);
+    List<Device> findByNameLike(String name);
 
     List<Device> findByLevel(long level);
+
+    List<Device> findByStatus(boolean status);
 
 }

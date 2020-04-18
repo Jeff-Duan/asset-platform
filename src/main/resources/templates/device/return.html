@@ -85,7 +85,7 @@
 				</select>
             </td>
             <td>
-                <button>查询</button>
+                <button id="select1">查询</button>
             </td>
         </tr>
         <tr align="center">
@@ -97,13 +97,13 @@
 				</select>
             </td>
             <td>
-                <button>查询</button>
+                <button id="select2">查询</button>
             </td>
         </tr>
         <tr align="center">
             <td>
                 归还ID
-                <input/>
+                <input id="deviceId"/>
             </td>
             <td>
                 <button>查询</button>
@@ -112,7 +112,7 @@
         <tr align="center">
             <td>
                 归还日期
-				<input/>
+				<input id="returnDate"/>
             </td>
             <td>
                 <button>查询</button>
@@ -121,7 +121,7 @@
         <tr align="center">
             <td>
                 归还者
-				<input/>
+				<input id="user"/>
             </td>
             <td>
                 <button>查询</button>
@@ -152,27 +152,72 @@
 			}
 		});
 
-		$('#return').on("click", function () {
-			var useRecord = {};
-            useRecord.deviceId = $('#deviceId').val();
-            useRecord.useDate = $('#useDate').val();
-            useRecord.user = $('#user').val();
+        // 按Level1查询归还设备
+        $('#select1').on("click", function () {
             $.ajax({
-                url: '/device/use',
+                url: '/open/api/device?level1=' + $('#level1').val() + '&status=false',
+                type: "get",
+                async: false,
+                cache: false,
+                data: {},
+                dataType: "json",
+                processData: false,
+                contentType: "application/json;charset-UTF-8",
+                statusCode: {
+                    200: function(result){
+                        alert(JSON.stringify(result));
+                    },
+                    500: function(){
+                        alert("查询可归还设备失败");
+                    }
+                }
+            });
+		});
+
+		// 按Level2查询归还设备
+        $('#select2').on("click", function () {
+            $.ajax({
+                url: '/open/api/device?level2=' + $('#level2').val() + '&status=false',
+                type: "get",
+                async: false,
+                cache: false,
+                data: {},
+                dataType: "json",
+                processData: false,
+                contentType: "application/json;charset-UTF-8",
+                statusCode: {
+                    200: function(result){
+                        alert(JSON.stringify(result));
+                    },
+                    500: function(){
+                        alert("查询可归还设备失败");
+                    }
+                }
+            });
+		});
+
+        // 归还设备操作
+		$('#return').on("click", function () {
+			var returnRecord = {};
+            returnRecord.deviceId = $('#deviceId').val();
+            returnRecord.returnDate = $('#returnDate').val();
+            returnRecord.user = $('#user').val();
+            $.ajax({
+                url: '/device/return',
                 type: "post",
                 async: false,
                 cache: false,
-                data: JSON.stringify(useRecord),
+                data: JSON.stringify(returnRecord),
                 dataType: "json",
                 processData: false,
                 contentType: "application/json;charset-UTF-8",
                 statusCode: {
                     200: function(){
-                        alert("领用设备成功");
+                        alert("归还设备成功");
                         location.reload();
                     },
                     500: function(){
-                        alert("领用设备失败");
+                        alert("归还设备失败");
                     }
                 }
             });

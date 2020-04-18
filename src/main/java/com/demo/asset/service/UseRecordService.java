@@ -14,4 +14,8 @@ public class UseRecordService {
     public void save(UseRecord useRecord) {
         useRecordRepository.save(useRecord);
     }
+
+    public UseRecord find(long id) {
+        return useRecordRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }
