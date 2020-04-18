@@ -1,8 +1,12 @@
 package com.demo.asset.controller;
 
 import com.demo.asset.entity.Device;
+import com.demo.asset.entity.ReturnRecord;
+import com.demo.asset.entity.UseRecord;
 import com.demo.asset.service.DeviceService;
 import com.demo.asset.service.LevelService;
+import com.demo.asset.service.ReturnRecordService;
+import com.demo.asset.service.UseRecordService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +31,12 @@ public class DeviceController {
 
     @Autowired
     private DeviceService deviceService;
+
+    @Autowired
+    private UseRecordService useRecordService;
+
+    @Autowired
+    private ReturnRecordService returnRecordService;
 
     @GetMapping
     public String device(Model model) {
@@ -74,6 +84,26 @@ public class DeviceController {
     public String useDevice(Model model) {
         model.addAttribute("Levels", levelService.findAllLevel1());
         return "device/use";
+    }
+
+    @PostMapping("/use")
+    @ResponseBody
+    public ResponseEntity<?> useDevice(@RequestBody UseRecord useRecord) {
+        useRecordService.save(useRecord);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+    @GetMapping("/return")
+    public String returnDevice(Model model) {
+        model.addAttribute("Levels", levelService.findAllLevel1());
+        return "device/return";
+    }
+
+    @PostMapping("/return")
+    @ResponseBody
+    public ResponseEntity<?> returnDevice(@RequestBody ReturnRecord returnRecord) {
+        returnRecordService.save(returnRecord);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
 }

@@ -17,7 +17,7 @@ public class UserController {
 
     @GetMapping
     public String user() {
-        return "user";
+        return "user/user";
     }
 
     @PostMapping("/{name}")

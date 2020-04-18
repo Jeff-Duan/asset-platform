@@ -1,82 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
 
-	<style>
+<style>
 		* {
 			margin: 0;
 			padding: 0;
 		}
-	</style>
+</style>
 
-	<body style="height: 100%;">
+<body style="height: 100%;">
 
-		<div style="position:fixed;width: 20%;height: 100%;float: left;">
-			<table style="margin-top: 10%; margin-left: 10%;" align="center" width="60%" height="40%" border="1" cellpadding="2" th:if="${Role == 0}">
-				<tr align="center">
-					<td>
-						<a href="#" th:href="@{/home}">首页</a>
-					</td>
-				</tr>
-				<tr align="center">
-					<td>
-						<a href="#" th:href="@{/device}">资产查询</a>
-					</td>
-				</tr>
-				<tr align="center">
-					<td>
-						<a href="#" th:href="@{/user}">更改密码</a>
-					</td>
-				</tr>
-				<tr align="center">
-					<td>
-						<a href="#" th:href="@{/access/logout}">退出登录</a>
-					</td>
-				</tr>
-			</table>
-			<table style="margin-top: 10%; margin-left: 10%;" align="center" width="60%" height="40%" border="1" cellpadding="2" th:if="${Role == 1}">
-				<tr align="center">
-					<td>
-						<a href="#" th:href="@{/home}">首页</a>
-					</td>
-				</tr>
-				<tr align="center">
-					<td>
-						<a href="#" th:href="@{/device}">资产管理</a>
-					</td>
-				</tr>
-				<tr align="center">
-					<td>
-						<a href="#">人员管理</a>
-					</td>
-				</tr>
-				<tr align="center">
-					<td>
-						<a href="#" th:href="@{/device/use}">资产领用</a>
-					</td>
-				</tr>
-				<tr align="center">
-					<td>
-						<a href="#">资产归还</a>
-					</td>
-				</tr>
-				<tr align="center">
-					<td>
-						<a href="#" th:href="@{/access/logout}">退出登录</a>
-					</td>
-				</tr>
-			</table>
-		</div>
+<div style="position:fixed;width: 20%;height: 100%;float: left;">
+	<table style="margin-top: 10%; margin-left: 10%;" align="center" width="60%" height="40%" border="1" cellpadding="2"
+		   th:if="${Role == 0}">
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/home}">首页</a>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/device}">资产查询</a>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/user}">更改密码</a>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/access/logout}">退出登录</a>
+			</td>
+		</tr>
+	</table>
+	<table style="margin-top: 10%; margin-left: 10%;" align="center" width="60%" height="40%" border="1" cellpadding="2"
+		   th:if="${Role == 1}">
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/home}">首页</a>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/device}">资产管理</a>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/user}">人员管理</a>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/device/use}">资产领用</a>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/device/return}">资产归还</a>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+				<a href="#" th:href="@{/access/logout}">退出登录</a>
+			</td>
+		</tr>
+	</table>
+</div>
 
-		<div style="position: fixed;margin-left: 25%; width: 75%;height: 100%;">
-			<h1 th:if="${Role == 0}">欢迎您进入固定资产管理系统!!!</h1>
-			<h1 th:if="${Role == 1}">管理员欢迎您进入固定资产管理系统!!!</h1>
-		</div>
+<div style="position: fixed;margin-left: 25%; width: 75%;height: 100%;">
+    <h1 th:if="${Role == 0}">欢迎您进入固定资产管理系统!!!</h1>
+    <h1 th:if="${Role == 1}">管理员欢迎您进入固定资产管理系统!!!</h1>
+</div>
 
-	</body>
+</body>
 
 </html>

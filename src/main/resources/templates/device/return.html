@@ -79,78 +79,105 @@
            border="1" cellpadding="2">
         <tr align="center">
             <td>
-                设备名称
-                <input id="name" name="name" />
+                一级类别
+				<select id="level1" name="level1">
+					<option th:each="level,index:${Levels}" th:text="${level.name}" th:value="${level.id}"></option>
+				</select>
+            </td>
+            <td>
+                <button>查询</button>
             </td>
         </tr>
         <tr align="center">
             <td>
-                设备价格
-                <input id="price" name="price" />
+                二级类别
+				<select id="level2" name="level2">
+					<option th:each="level,index:${Levels[0].level2s}" th:text="${level.name}"
+							th:value="${level.id}"></option>
+				</select>
+            </td>
+            <td>
+                <button>查询</button>
             </td>
         </tr>
         <tr align="center">
             <td>
-                设备类别
-                <select id="level" name="level">
-                    <option th:each="level,index:${Levels}" th:text="${level.name}" th:value="${level.id}"></option>
-                </select>
+                归还ID
+                <input/>
+            </td>
+            <td>
+                <button>查询</button>
             </td>
         </tr>
         <tr align="center">
             <td>
-                购买日期
-                <input id="buyDate" name="buyDate" />
+                归还日期
+				<input/>
+            </td>
+            <td>
+                <button>查询</button>
             </td>
         </tr>
         <tr align="center">
             <td>
-                备注说明
-                <input id="remark" name="remark" />
+                归还者
+				<input/>
+            </td>
+            <td>
+                <button>查询</button>
             </td>
         </tr>
         <tr align="center">
             <td colspan="2">
-                <button id="submit">提交</button>
+                <button id="return">归还</button>
             </td>
         </tr>
     </table>
 </div>
-
 <script type="text/javascript" src="../../jquery-3.4.1.min.js" th:src="@{/jquery-3.4.1.min.js}"></script>
 <script type="text/javascript" th:inline="javascript">
-    var user = [[${User}]];
+	var levels = [[${Levels}]];
+
 	$(function() {
-		$('#submit').on("click", function () {
-			var device = {};
-            device.name = $('#name').val();
-            device.price = $('#price').val();
-            device.level = $('#level').val();
-            device.buyDate = $('#buyDate').val();
-            device.user = user;
-            device.remark = $('#remark').val();
+		$('#level1').on("input propertychange", function () {
+			$('#level2').empty();
+			for(var i = 0; i < levels.length; i++) {
+				if(levels[i].id == $(this).val()){
+					for(var j = 0; j < levels[i].level2s.length; j++) {
+						var option = $("<option>").val(levels[i].level2s[j].id).text(levels[i].level2s[j].name);
+						$('#level2').append(option);
+					}
+					break;
+				}
+			}
+		});
+
+		$('#return').on("click", function () {
+			var useRecord = {};
+            useRecord.deviceId = $('#deviceId').val();
+            useRecord.useDate = $('#useDate').val();
+            useRecord.user = $('#user').val();
             $.ajax({
-                url: '/device',
+                url: '/device/use',
                 type: "post",
                 async: false,
                 cache: false,
-                data: JSON.stringify(device),
+                data: JSON.stringify(useRecord),
                 dataType: "json",
                 processData: false,
                 contentType: "application/json;charset-UTF-8",
                 statusCode: {
                     200: function(){
-                        alert("添加设备成功");
+                        alert("领用设备成功");
                         location.reload();
                     },
                     500: function(){
-                        alert("添加设备失败");
+                        alert("领用设备失败");
                     }
                 }
             });
 		});
 	});
-
 
 </script>
 </body>
