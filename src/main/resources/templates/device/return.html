@@ -103,7 +103,7 @@
         <tr align="center">
             <td>
                 归还ID
-                <input/>
+                <input id="useId"/>
             </td>
             <td>
                 <button>查询</button>
@@ -112,7 +112,7 @@
         <tr align="center">
             <td>
                 归还日期
-				<input/>
+				<input id="returnDate"/>
             </td>
             <td>
                 <button>查询</button>
@@ -121,7 +121,7 @@
         <tr align="center">
             <td>
                 归还者
-				<input/>
+				<input id="user"/>
             </td>
             <td>
                 <button>查询</button>
@@ -154,11 +154,11 @@
 
 		$('#return').on("click", function () {
 			var useRecord = {};
-            useRecord.deviceId = $('#deviceId').val();
-            useRecord.useDate = $('#useDate').val();
+            useRecord.useId = $('#useId').val();
+            useRecord.returnDate = $('#returnDate').val();
             useRecord.user = $('#user').val();
             $.ajax({
-                url: '/device/use',
+                url: '/device/return',
                 type: "post",
                 async: false,
                 cache: false,
@@ -168,11 +168,11 @@
                 contentType: "application/json;charset-UTF-8",
                 statusCode: {
                     200: function(){
-                        alert("领用设备成功");
+                        alert("归还设备成功");
                         location.reload();
                     },
                     500: function(){
-                        alert("领用设备失败");
+                        alert("归还设备失败");
                     }
                 }
             });

@@ -13,7 +13,7 @@ public class ReturnRecord {
     private long id;
 
     @Column(name = "use_id")
-    private String useId;
+    private long useId;
 
     @Column(name = "return_date")
     private Date returnDate;
@@ -38,11 +38,11 @@ public class ReturnRecord {
         this.id = id;
     }
 
-    public String getUseId() {
+    public long getUseId() {
         return useId;
     }
 
-    public void setUseId(String useId) {
+    public void setUseId(long useId) {
         this.useId = useId;
     }
 

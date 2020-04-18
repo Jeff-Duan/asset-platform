@@ -85,7 +85,7 @@
                 </select>
             </td>
             <td>
-                <button>查询</button>
+                <button id="select1">查询</button>
             </td>
         </tr>
         <tr align="center">
@@ -97,16 +97,16 @@
                 </select>
             </td>
             <td>
-                <button>查询</button>
+                <button id="select2">查询</button>
             </td>
         </tr>
         <tr align="center">
             <td>
                 设备名称
-                <input/>
+                <input id="name" name="name"/>
             </td>
             <td>
-                <button>查询</button>
+                <button id="select3">查询</button>
             </td>
         </tr>
         <tr align="center">
@@ -115,7 +115,7 @@
                 <input id="deviceId"/>
             </td>
             <td>
-                <button>查询</button>
+                <button id="select4">查询</button>
             </td>
         </tr>
         <tr align="center">
@@ -149,6 +149,7 @@
 	var levels = [[${Levels}]];
 
 	$(function() {
+	    // Level选择框联动操作
 		$('#level1').on("input propertychange", function () {
 			$('#level2').empty();
 			for(var i = 0; i < levels.length; i++) {
@@ -162,6 +163,95 @@
 			}
 		});
 
+        // 按Level1查询领用设备
+		$('#select1').on("click", function () {
+            $.ajax({
+                url: '/open/api/device?level1=' + $('#level1').val() + '&level2=&name=&status=true',
+                type: "get",
+                async: false,
+                cache: false,
+                data: {},
+                dataType: "json",
+                processData: false,
+                contentType: "application/json;charset-UTF-8",
+                statusCode: {
+                    200: function(result){
+                        alert(JSON.stringify(result));
+                    },
+                    500: function(){
+                        alert("查询可领用设备失败");
+                    }
+                }
+            });
+		});
+
+		// 按Level2查询领用设备
+		$('#select2').on("click", function () {
+            $.ajax({
+                url: '/open/api/device?level1=&level2=' + $('#level2').val() + '&name=&status=true',
+                type: "get",
+                async: false,
+                cache: false,
+                data: {},
+                dataType: "json",
+                processData: false,
+                contentType: "application/json;charset-UTF-8",
+                statusCode: {
+                    200: function(result){
+                        alert(JSON.stringify(result));
+                    },
+                    500: function(){
+                        alert("查询可领用设备失败");
+                    }
+                }
+            });
+		});
+
+		// 按name查询领用设备
+		$('#select3').on("click", function () {
+            $.ajax({
+                url: '/open/api/device?level1=&level2=&name=' + $('#name').val() + '&status=true',
+                type: "get",
+                async: false,
+                cache: false,
+                data: {},
+                dataType: "json",
+                processData: false,
+                contentType: "application/json;charset-UTF-8",
+                statusCode: {
+                    200: function(result){
+                        alert(JSON.stringify(result));
+                    },
+                    500: function(){
+                        alert("查询可领用设备失败");
+                    }
+                }
+            });
+		});
+
+		// 按ID查询领用设备
+		$('#select4').on("click", function () {
+            $.ajax({
+                url: '/open/api/device?id=' + $('#deviceId').val() + '&status=true',
+                type: "get",
+                async: false,
+                cache: false,
+                data: {},
+                dataType: "json",
+                processData: false,
+                contentType: "application/json;charset-UTF-8",
+                statusCode: {
+                    200: function(result){
+                        alert(JSON.stringify(result));
+                    },
+                    500: function(){
+                        alert("查询可领用设备失败");
+                    }
+                }
+            });
+		});
+
+        // 领用操作
 		$('#use').on("click", function () {
 			var useRecord = {};
             useRecord.deviceId = $('#deviceId').val();
@@ -188,7 +278,6 @@
             });
 		});
 	});
-
 </script>
 </body>
 

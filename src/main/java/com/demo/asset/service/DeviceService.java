@@ -13,16 +13,24 @@ public class DeviceService {
     @Autowired
     DeviceRepository deviceRepository;
 
-    public void save(Device device){
+    public void save(Device device) {
         deviceRepository.save(device);
     }
 
     public List<Device> findAll(String name) {
-        return deviceRepository.findByName(name);
+        return deviceRepository.findByNameLike(name);
     }
 
     public List<Device> findAll(long level) {
         return deviceRepository.findByLevel(level);
+    }
+
+    public List<Device> findAll(boolean status) {
+        return deviceRepository.findByStatus(status);
+    }
+
+    public Device find(long id) {
+        return deviceRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
 }

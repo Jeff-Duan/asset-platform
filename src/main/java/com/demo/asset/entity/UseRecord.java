@@ -13,7 +13,7 @@ public class UseRecord {
     private long id;
 
     @Column(name = "device_id")
-    private String deviceId;
+    private long deviceId;
 
     @Column(name = "use_date")
     private Date useDate;
@@ -38,11 +38,11 @@ public class UseRecord {
         this.id = id;
     }
 
-    public String getDeviceId() {
+    public long getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(String deviceId) {
+    public void setDeviceId(long deviceId) {
         this.deviceId = deviceId;
     }
 

@@ -76,9 +76,8 @@ public class DeviceController {
     public ResponseEntity<?> insert(@RequestBody Device device) {
         device.setUser(String.valueOf(session.getAttribute("User")));
         deviceService.save(device);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
     @GetMapping("/use")
     public String useDevice(Model model) {
@@ -90,7 +89,10 @@ public class DeviceController {
     @ResponseBody
     public ResponseEntity<?> useDevice(@RequestBody UseRecord useRecord) {
         useRecordService.save(useRecord);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        Device device = deviceService.find(useRecord.getDeviceId());
+        device.setStatus(false);
+        deviceService.save(device);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/return")
@@ -103,7 +105,10 @@ public class DeviceController {
     @ResponseBody
     public ResponseEntity<?> returnDevice(@RequestBody ReturnRecord returnRecord) {
         returnRecordService.save(returnRecord);
-        return new ResponseEntity<>("OK", HttpStatus.OK);
+        UseRecord useRecord = useRecordService.find(returnRecord.getUseId());
+        Device device = deviceService.find(useRecord.getDeviceId());
+        device.setStatus(true);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
