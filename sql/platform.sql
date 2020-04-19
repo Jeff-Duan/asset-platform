@@ -21,13 +21,13 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `device`;
 CREATE TABLE `device` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '设备ID',
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '鐠佹儳顦崥宥囆?',
-  `price` int NOT NULL COMMENT '璁惧浠锋牸',
-  `level` int NOT NULL COMMENT '璁惧绫诲瀷',
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '设备名称',
+  `price` int NOT NULL COMMENT '设备价格',
+  `level` int NOT NULL COMMENT '二级类别',
   `buy_date` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '购买日期',
   `status` tinyint NOT NULL COMMENT '设备状态',
   `user` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '使用者',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '澶囨敞',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
