@@ -15,7 +15,7 @@
 
 <body style="height: 100%;">
 
-<div style="position:fixed;width: 20%;height: 100%;float: left;">
+<div style="background-image: url(/imgs/background.jpg);background-size: cover;position:fixed;width: 20%;height: 100%;float: left;">
 	<table style="margin-top: 10%; margin-left: 10%;" align="center" width="60%" height="40%" border="1" cellpadding="2"
 		   th:if="${Role == 0}">
 		<tr align="center">
@@ -74,7 +74,7 @@
 	</table>
 </div>
 
-<div style="position: fixed;margin-left: 25%; width: 75%;height: 100%;">
+<div style="background-image: url(/imgs/background.jpg);background-size: cover;position: fixed;margin-left: 25%; width: 75%;height: 100%;">
     <h1 th:if="${Role == 0}">欢迎您进入固定资产管理系统!!!</h1>
     <h1 th:if="${Role == 1}">管理员欢迎您进入固定资产管理系统!!!</h1>
 </div>
